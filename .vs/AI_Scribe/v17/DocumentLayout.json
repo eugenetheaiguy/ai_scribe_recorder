@@ -1,0 +1,106 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\scriberecording.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\scriberecording.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\services\\transcription\\transcriptionservice_whisper.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\services\\transcription\\transcriptionservice_whisper.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\obj\\debug\\net8.0-windows\\mainwindow.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\obj\\debug\\net8.0-windows\\mainwindow.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 358,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "AI_Scribe\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\MainWindow.xaml.cs",
+              "RelativeToolTip": "AI_Scribe\\MainWindow.xaml.cs",
+              "ViewState": "AQIAALkAAAAAAAAAAAAewMIAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T01:32:02.755Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "AI_Scribe\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\MainWindow.xaml",
+              "RelativeToolTip": "AI_Scribe\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-28T21:30:10.104Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TranscriptionService_Whisper.cs",
+              "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\Transcription\\TranscriptionService_Whisper.cs",
+              "RelativeDocumentMoniker": "AI_Scribe\\Services\\Transcription\\TranscriptionService_Whisper.cs",
+              "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\Transcription\\TranscriptionService_Whisper.cs",
+              "RelativeToolTip": "AI_Scribe\\Services\\Transcription\\TranscriptionService_Whisper.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAuwBcAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T22:27:25.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ScribeRecording.cs",
+              "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\ScribeRecording.cs",
+              "RelativeDocumentMoniker": "AI_Scribe\\ScribeRecording.cs",
+              "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\ScribeRecording.cs",
+              "RelativeToolTip": "AI_Scribe\\ScribeRecording.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T22:27:17.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.g.i.cs",
+              "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs",
+              "RelativeDocumentMoniker": "AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs",
+              "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs",
+              "RelativeToolTip": "AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs",
+              "ViewState": "AQIAAHYAAAAAAAAAAAAjwH4AAABrAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T21:52:08.802Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

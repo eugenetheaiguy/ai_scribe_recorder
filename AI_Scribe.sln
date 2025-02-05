@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI_Scribe", "AI_Scribe\AI_Scribe.csproj", "{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {322ED047-1034-4701-B8B4-9BA3D57E6058}
+	EndGlobalSection
+EndGlobal
