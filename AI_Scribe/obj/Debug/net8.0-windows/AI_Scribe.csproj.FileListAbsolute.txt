@@ -36,3 +36,4 @@ C:\Users\eugen\source\repos\AI_Scribe\AI_Scribe\obj\Debug\net8.0-windows\AI_Scri
 C:\Users\eugen\source\repos\AI_Scribe\AI_Scribe\bin\Debug\net8.0-windows\libmp3lame.32.dll
 C:\Users\eugen\source\repos\AI_Scribe\AI_Scribe\bin\Debug\net8.0-windows\libmp3lame.64.dll
 C:\Users\eugen\source\repos\AI_Scribe\AI_Scribe\bin\Debug\net8.0-windows\NAudio.Lame.dll
+C:\Users\eugen\source\repos\AI_Scribe\AI_Scribe\obj\Debug\net8.0-windows\AI_Scribe.sourcelink.json

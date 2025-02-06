@@ -63,6 +63,15 @@ namespace AI_Scribe
             LoadExistingRecordings();
         }
 
+        public void ShowProcessingOverlay()
+        {
+            ProcessingOverlay.Visibility = Visibility.Visible;
+        }
+
+        public void HideProcessingOverlay()
+        {
+            ProcessingOverlay.Visibility = Visibility.Collapsed;
+        }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -246,6 +255,7 @@ namespace AI_Scribe
 
         private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
         {
+
             if (waveWriter != null)
             {
                 waveWriter.Write(e.Buffer, 0, e.BytesRecorded);
@@ -274,9 +284,10 @@ namespace AI_Scribe
                 var iniData = parser.ReadFile("config.ini");
 
 
+                ShowProcessingOverlay();
                 // Create new ScribeRecording object
                 var recording = await ScribeRecording.CreateScribeAsync(newScribeOutputPath);
-
+                HideProcessingOverlay();
 
 
 
@@ -338,7 +349,9 @@ namespace AI_Scribe
 
         private async void RegenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            var recording = SelectedRecording.Regenerate();
+            ShowProcessingOverlay();
+            var recording = await SelectedRecording.Regenerate();
+            HideProcessingOverlay();
         }
         private void RecordButton_Click(object sender, RoutedEventArgs e)
         {

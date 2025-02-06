@@ -7,20 +7,32 @@
       "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\scriberecording.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\services\\transcription\\transcriptionservice_whisper.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\services\\transcription\\transcriptionservice_whisper.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\obj\\debug\\net8.0-windows\\mainwindow.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\obj\\debug\\net8.0-windows\\mainwindow.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\services\\notegeneration\\notegenerator_openai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\services\\notegeneration\\notegenerator_openai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\services\\audioprocessing\\audioprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\services\\audioprocessing\\audioprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|c:\\users\\eugen\\source\\repos\\ai_scribe\\ai_scribe\\services\\audioprocessing\\audioconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C452732-4BCE-4D0C-A41C-1E39BB06DCB0}|AI_Scribe\\AI_Scribe.csproj|solutionrelative:ai_scribe\\services\\audioprocessing\\audioconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,17 +42,17 @@
       "DocumentGroups": [
         {
           "DockedHeight": 358,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "AI_Scribe\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\MainWindow.xaml.cs",
               "RelativeToolTip": "AI_Scribe\\MainWindow.xaml.cs",
-              "ViewState": "AQIAALkAAAAAAAAAAAAewMIAAABIAAAA",
+              "ViewState": "AQIAABQBAAAAAAAAAAAEwCEBAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-22T01:32:02.755Z",
               "IsPinned": true,
@@ -61,13 +73,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "NoteGenerator_OpenAI.cs",
+              "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\NoteGeneration\\NoteGenerator_OpenAI.cs",
+              "RelativeDocumentMoniker": "AI_Scribe\\Services\\NoteGeneration\\NoteGenerator_OpenAI.cs",
+              "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\NoteGeneration\\NoteGenerator_OpenAI.cs",
+              "RelativeToolTip": "AI_Scribe\\Services\\NoteGeneration\\NoteGenerator_OpenAI.cs",
+              "ViewState": "AQIAAFoAAAAAAAAAAIAZwDUAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T20:46:28.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AudioProcessor.cs",
+              "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\AudioProcessing\\AudioProcessor.cs",
+              "RelativeDocumentMoniker": "AI_Scribe\\Services\\AudioProcessing\\AudioProcessor.cs",
+              "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\AudioProcessing\\AudioProcessor.cs",
+              "RelativeToolTip": "AI_Scribe\\Services\\AudioProcessing\\AudioProcessor.cs",
+              "ViewState": "AQIAABQAAABAzczMzIwrwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T20:45:56.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AudioConverter.cs",
+              "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\AudioProcessing\\AudioConverter.cs",
+              "RelativeDocumentMoniker": "AI_Scribe\\Services\\AudioProcessing\\AudioConverter.cs",
+              "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\AudioProcessing\\AudioConverter.cs",
+              "RelativeToolTip": "AI_Scribe\\Services\\AudioProcessing\\AudioConverter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T20:45:55.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "TranscriptionService_Whisper.cs",
               "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\Transcription\\TranscriptionService_Whisper.cs",
               "RelativeDocumentMoniker": "AI_Scribe\\Services\\Transcription\\TranscriptionService_Whisper.cs",
               "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\Services\\Transcription\\TranscriptionService_Whisper.cs",
               "RelativeToolTip": "AI_Scribe\\Services\\Transcription\\TranscriptionService_Whisper.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAuwBcAAAAzAAAA",
+              "ViewState": "AQIAADkAAAAAAAAAAAAEwEQAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T22:27:25.053Z",
               "EditorCaption": ""
@@ -80,14 +131,14 @@
               "RelativeDocumentMoniker": "AI_Scribe\\ScribeRecording.cs",
               "ToolTip": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\ScribeRecording.cs",
               "RelativeToolTip": "AI_Scribe\\ScribeRecording.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAATAAAA",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAAAFAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T22:27:17.905Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "MainWindow.g.i.cs",
               "DocumentMoniker": "C:\\Users\\eugen\\source\\repos\\AI_Scribe\\AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs",
               "RelativeDocumentMoniker": "AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs",
@@ -95,8 +146,7 @@
               "RelativeToolTip": "AI_Scribe\\obj\\Debug\\net8.0-windows\\MainWindow.g.i.cs",
               "ViewState": "AQIAAHYAAAAAAAAAAAAjwH4AAABrAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T21:52:08.802Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T21:52:08.802Z"
             }
           ]
         }
