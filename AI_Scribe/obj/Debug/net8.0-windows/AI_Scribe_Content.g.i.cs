@@ -9,5 +9,6 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("config.ini")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("configprompt.json")]
 
 

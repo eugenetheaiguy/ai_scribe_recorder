@@ -9,6 +9,9 @@ using IniParser;
 using IniParser.Model;
 using Path = System.IO.Path;  // Add this at the top of your file
 using System.Windows.Input;
+using System.Windows.Threading;
+using System.Diagnostics;
+using System.Windows.Media.Animation;
 namespace AI_Scribe
 {
 
@@ -20,6 +23,7 @@ namespace AI_Scribe
         private bool isRecording = false;
         private WaveInEvent waveIn;
         private WaveFileWriter waveWriter;
+        private Stopwatch _stopwatch;
         private string newScribeOutputPath;
 
         // Add this property
@@ -57,7 +61,7 @@ namespace AI_Scribe
         {
             Recordings = new ObservableCollection<ScribeRecording>();
             InitializeComponent();
-
+            InitializeTimer();
             DataContext = this;
 
             LoadExistingRecordings();
@@ -201,9 +205,9 @@ namespace AI_Scribe
                     try
                     {
                         // Get all .wav files in this folder
-                        var wavFiles = Directory.GetFiles(folder, "*.mp3");
+                        var mp3Files = Directory.GetFiles(folder, "*.mp3");
 
-                        foreach (var wavFile in wavFiles)
+                        foreach (var wavFile in mp3Files)
                         {
                             // Get the base filename without extension
                             string baseFileName = Path.GetFileNameWithoutExtension(wavFile);
@@ -212,12 +216,13 @@ namespace AI_Scribe
                             // Construct expected transcript and note file paths
                             string transcriptPath = Path.Combine(folderPath, $"{baseFileName}.transcript.txt");
                             string notePath = Path.Combine(folderPath, $"{baseFileName}.note.txt");
+                            string namePath = Path.Combine(folderPath, $"{baseFileName}.name.txt");
 
                             // Verify all required files exist
-                            if (File.Exists(wavFile) && File.Exists(transcriptPath) && File.Exists(notePath))
+                            if (File.Exists(wavFile))
                             {
                                 // Create ScribeRecording object
-                                var recording = new ScribeRecording(wavFile, transcriptPath, notePath);
+                                var recording = new ScribeRecording(wavFile, transcriptPath, notePath, namePath);
 
                                 // Add to collection on UI thread
                                 Application.Current.Dispatcher.Invoke(() =>
@@ -327,7 +332,19 @@ namespace AI_Scribe
             }
         }
 
-        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        // Add this method to your MainWindow.xaml.cs
+        private async Task ShowNotification(string message, int durationMs = 3000)
+        {
+            NotificationText.Text = message;
+            var showStoryboard = (Storyboard)FindResource("ShowNotification");
+            var hideStoryboard = (Storyboard)FindResource("HideNotification");
+
+            showStoryboard.Begin();
+            await Task.Delay(durationMs);
+            hideStoryboard.Begin();
+        }
+
+        private async void CopyButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -338,8 +355,9 @@ namespace AI_Scribe
                     
                     Clipboard.SetText(textboxwithtext.Text);
                     // Optional: Show success message or status
-                }     
-
+                }
+                await ShowNotification("Text copied!");
+            
             }
             catch (Exception ex)
             {
@@ -347,11 +365,41 @@ namespace AI_Scribe
             }
         }
 
+        private TimeSpan _recordingTime;
+        private DispatcherTimer _recordingTimer;
+        public TimeSpan RecordingTime
+        {
+            get => _recordingTime;
+            set
+            {
+                _recordingTime = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RecordingTime)));
+            }
+        }
+
+        private void InitializeTimer()
+        {
+            _recordingTimer = new DispatcherTimer();
+            _stopwatch = new Stopwatch();
+            _recordingTimer.Interval = TimeSpan.FromMilliseconds(16);
+            _recordingTimer.Tick += Timer_Tick;
+            RecordingTime = TimeSpan.Zero;
+
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            RecordingTime = _stopwatch.Elapsed;
+        }
+
         private async void RegenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowProcessingOverlay();
-            var recording = await SelectedRecording.Regenerate();
-            HideProcessingOverlay();
+            if (SelectedRecording != null)
+            {
+                ShowProcessingOverlay();
+                var recording = await SelectedRecording.Regenerate();
+                HideProcessingOverlay();
+            }
         }
         private void RecordButton_Click(object sender, RoutedEventArgs e)
         {
@@ -360,11 +408,16 @@ namespace AI_Scribe
             if (isRecording)
             {
                 StartRecording();
+                _recordingTimer.Start();
+                _stopwatch.Start();
                 RecordButton.Style = (Style)FindResource("RecordingButtonActive");
             }
             else
             {
                 StopRecording();
+                _recordingTimer.Stop();
+                _stopwatch.Stop();
+                _stopwatch.Reset();
                 RecordButton.Style = (Style)FindResource("RecordingButton");        
             }
         }
@@ -379,6 +432,63 @@ namespace AI_Scribe
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        
+        // Event: Switch from TextBlock to TextBox on Click
+        private void DisplayNameText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is TextBlock textBlock)
+            {
+                if (textBlock.Parent is StackPanel parent)
+                {
+                    var textBox = parent.Children[1] as TextBox; // Find the TextBox
+                    if (textBox != null)
+                    {
+                        textBlock.Visibility = Visibility.Collapsed;
+                        textBox.Visibility = Visibility.Visible;
+                        textBox.Focus();
+                        textBox.SelectAll();
+                    }
+                }
+            }
+        }
+
+        // Event: Switch from TextBox back to TextBlock when focus is lost
+        private void DisplayNameTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (textBox.Parent is StackPanel parent)
+                {
+                    var textBlock = parent.Children[0] as TextBlock; // Find the TextBlock
+                    if (textBlock != null)
+                    {
+                        textBox.Visibility = Visibility.Collapsed;
+                        textBlock.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+        }
+
+        // Event: Hide TextBox and show TextBlock when Enter is pressed
+        private void DisplayNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (sender is TextBox textBox)
+                {
+                    if (textBox.Parent is StackPanel parent)
+                    {
+                        var textBlock = parent.Children[0] as TextBlock; // Find the TextBlock
+                        if (textBlock != null)
+                        {
+                            textBox.Visibility = Visibility.Collapsed;
+                            textBlock.Visibility = Visibility.Visible;
+                        }
+                    }
+                }
+            }
         }
     }
 
