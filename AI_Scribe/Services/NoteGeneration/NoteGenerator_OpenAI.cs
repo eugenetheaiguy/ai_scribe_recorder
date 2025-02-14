@@ -51,7 +51,7 @@ namespace AI_Scribe.Services
                 var client = new RestClient("https://api.openai.com/v1/chat/completions");
                 var request = new RestRequest();
                 request.Method = Method.Post;
-                request.AddHeader("Authorization", "Bearer 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");
+                request.AddHeader ("Authorization", "PUTTOKENHERE"); //Broken up so to allow me t 
                 // Prepare the input for GPT-4
                 var body = new
                 {

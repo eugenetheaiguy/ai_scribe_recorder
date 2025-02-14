@@ -127,7 +127,7 @@ namespace AI_Scribe
                 {         {
             reader.CopyTo(writer);
 
-        }}
+                }}
             }
 
         }

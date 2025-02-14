@@ -30,7 +30,7 @@ namespace AI_Scribe.Services
 
                 var client = new RestClient("https://api.openai.com/v1/audio");
                 var request = new RestRequest("transcriptions", Method.Post);
-                request.AddHeader("Authorization", "Bearer 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");
+                request.AddHeader("Authorization", "PUTTOKENHERE");
                 request.AddFile("file", audioFilePath);
                 request.AddParameter("model", "whisper-1");
 
