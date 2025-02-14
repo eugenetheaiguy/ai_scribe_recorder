@@ -12,6 +12,7 @@ using System.Reflection.Metadata;
 using IniParser;
 using NAudio.Wave;
 using NAudio.Lame;
+using System.Globalization;
 
 
 namespace AI_Scribe
@@ -21,7 +22,7 @@ namespace AI_Scribe
         private string audioFilePath;
         private string noteFile;
         private string transcriptFile;
-
+        private string nameFile;
 
         private bool isSelectedForDeletion;
         private string recordedAtDisplay;
@@ -31,18 +32,12 @@ namespace AI_Scribe
         {
             get
             {
-
-                // Split the filename by underscore
-                string[] parts = audioFilePath.Split('_', '.');
-
-                // Extract first and last name (parts[1] is first name, parts[2] is last name)
-                string firstName = parts[1];
-                string lastName = parts[2];
-
-                // You can now use firstName and lastName variables
-                Console.WriteLine($"First Name: {firstName}"); // Output: First Name: Eugene
-                Console.WriteLine($"Last Name: {lastName}");
-                return firstName + lastName;
+                return File.ReadAllText($"{nameFile}");
+            }
+            set
+            {
+                OnPropertyChanged(nameof(DisplayName));
+                File.WriteAllText($"{nameFile}", value);
             }
         }
 
@@ -53,24 +48,42 @@ namespace AI_Scribe
                 // Split the filename by underscore
                 string[] parts = audioFilePath.Split('_', '.');
 
-                // Extract first and last name (parts[1] is first name, parts[2] is last name)
-                string date = parts[2];
-                //string time = parts[3];
+                if (parts.Length < 3)
+                {
+                    return "Invalid filename format";
+                }
 
-                // You can now use firstName and lastName variables
-                return date;
+                // Extract date (YYYYMMDD) and time (HHmmss)
+                string date = parts[1];
+                string time = parts[2];
+
+                // Validate the length of date and time
+                if (date.Length == 8 && time.Length >= 6)
+                {
+                    // Parse date and time
+                    DateTime parsedDateTime = DateTime.ParseExact(
+                        date + time.Substring(0, 6),
+                        "yyyyMMddHHmmss",
+                        CultureInfo.InvariantCulture
+                    );
+
+                    // Convert to desired format (e.g., "January 2, 2025 at 07:19:43 PM")
+                    return parsedDateTime.ToString("MMMM d, yyyy 'at' hh:mm:ss tt", CultureInfo.InvariantCulture);
+                }
+
+                return "Invalid date/time format";
             }
         }
 
 
-
-        public ScribeRecording(string audioFile, string transcriptFile, string noteFile)
+        public ScribeRecording(string audioFile, string transcriptFile, string noteFile, string metaData)
         {
 
             // Move/Copy files to the new structure while keeping original filenames
             this.audioFilePath = audioFile;
             this.transcriptFile = transcriptFile;
             this.noteFile = noteFile;
+            this.nameFile = metaData;// We assume only metadata is displayhName
         }
 
         private string MoveFileToFolder(string sourceFile, string targetFolder)
@@ -102,10 +115,8 @@ namespace AI_Scribe
             ConvertWavToMp3(audioFilePath, audioFilePath.Replace("wav", "mp3"), 128);
             var outputTranscriptFile = await TranscriptionService_Whisper.TranscribeAudio(audioFilePath);
             var outputNoteFile = await NoteGenerator_OpenAI.GenerateNotes(outputTranscriptFile);
-
-            //Todo: Make Sure to rename the transcript file, notefile, and the audio file based off the name of the patient and the date.
-            // Add logic to process audio file
-            return new ScribeRecording(mp3AudioFilePath, outputTranscriptFile, outputNoteFile);
+            var name = await NoteGenerator_OpenAI.ExtractName(outputTranscriptFile);
+            return new ScribeRecording(mp3AudioFilePath, outputTranscriptFile, outputNoteFile, name);
         }
 
         public static void ConvertWavToMp3(string wavPath, string mp3Path, int bitRate = 128)
@@ -116,7 +127,7 @@ namespace AI_Scribe
                 {         {
             reader.CopyTo(writer);
 
-        }}
+                }}
             }
 
         }
@@ -124,9 +135,11 @@ namespace AI_Scribe
 
         public async Task<ScribeRecording> Regenerate()
         {
+
             await TranscriptionService_Whisper.TranscribeAudio(AudioFilePath);
 
             await NoteGenerator_OpenAI.GenerateNotes(transcriptFile);
+
             OnPropertyChanged(nameof(Note));
             OnPropertyChanged(nameof(Transcript));
             return this;
@@ -186,31 +199,14 @@ namespace AI_Scribe
         {
             try
             {
-                // Delete individual files
-                if (File.Exists(audioFilePath))
-                {
-                    File.Delete(audioFilePath);
-                }
-
-                if (File.Exists(transcriptFile))
-                {
-                    File.Delete(transcriptFile);
-                }
-
-                if (File.Exists(noteFile))
-                {
-                    File.Delete(noteFile);
-                }
 
                 // Get the directory containing these files
                 string recordingFolder = Path.GetDirectoryName(audioFilePath);
 
                 // If the directory exists and is empty, delete it
-                if (Directory.Exists(recordingFolder) &&
-                    !Directory.EnumerateFiles(recordingFolder).Any() &&
-                    !Directory.EnumerateDirectories(recordingFolder).Any())
+                if (Directory.Exists(recordingFolder))
                 {
-                    Directory.Delete(recordingFolder);
+                    Directory.Delete(recordingFolder, recursive: true);
                 }
             }
             catch (Exception ex)

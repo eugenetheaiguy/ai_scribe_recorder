@@ -18,11 +18,9 @@ namespace AI_Scribe.Services
         {
             ValidateAudioPath(audioFilePath);
 
-            string processedFilePath = audioFilePath;
-
             if (Path.GetExtension(audioFilePath).Equals(".aac", StringComparison.OrdinalIgnoreCase))
             {
-                processedFilePath = Path.ChangeExtension(audioFilePath, ".wav");
+                string processedFilePath = Path.ChangeExtension(audioFilePath, ".wav");
 
                 try
                 {
@@ -32,11 +30,13 @@ namespace AI_Scribe.Services
                 {
                     throw new InvalidOperationException("Error occurred during audio conversion.", ex);
                 }
+
+                // Replace Console.WriteLine with a logging framework in production
+                Console.WriteLine($"Processed audio file: {processedFilePath}");
+                return processedFilePath;
             }
 
-            // Replace Console.WriteLine with a logging framework in production
-            Console.WriteLine($"Processed audio file: {processedFilePath}");
-            return processedFilePath;
+            return audioFilePath;
         }
 
         private void ValidateAudioPath(string audioFilePath)

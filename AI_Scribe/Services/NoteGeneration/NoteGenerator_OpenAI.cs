@@ -11,7 +11,7 @@ namespace AI_Scribe.Services
     /// <summary>
     /// Implementation of the INoteGenerator interface using OpenAI for generating structured notes.
     /// </summary>
-    internal class NoteGenerator_OpenAI
+    internal class NoteGenerator_OpenAI_Original
     {
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace AI_Scribe.Services
                 var client = new RestClient("https://api.openai.com/v1/chat/completions");
                 var request = new RestRequest();
                 request.Method = Method.Post;
-                request.AddHeader("Authorization", "Bearer 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");
+                request.AddHeader ("Authorization", "PUTTOKENHERE"); //Broken up so to allow me t 
                 // Prepare the input for GPT-4
                 var body = new
                 {
@@ -66,9 +66,10 @@ namespace AI_Scribe.Services
                         new
                         {
                             role = "user",
-                            content = transcriptContent
+                            content = "Generate a detailed, structured, and clinically accurate SOAP note based on the following patient encounter transcript. The output must strictly follow the SOAP format below, ensuring clarity, consistency, and adherence to medical documentation standards.\r\n\r\nDo not include any extra text, explanations, or commentary.\r\nRespond only with the SOAP note in the structured format provided below.\r\nEnsure concise, medically relevant phrasing with a professional clinical tone.\r\nUse bullet points where appropriate to enhance clarity.\r\nMaintain logical flow between sections, ensuring a complete and coherent patient narrative.\r\nFollow this exact SOAP format:\r\n\r\nSOAP Note Template\r\nSubjective:\r\nChief Complaint (CC): [Brief statement summarizing the patient’s primary concern.]\r\nHistory of Present Illness (HPI):\r\nOnset: [When symptoms started]\r\nDuration: [How long symptoms have persisted]\r\nSeverity: [Mild, moderate, severe, or scale (e.g., 7/10)]\r\nQuality: [Sharp, dull, throbbing, etc.]\r\nLocation/Radiation: [Where the symptom is felt and if it spreads]\r\nAggravating/Relieving Factors: [What makes it worse or better]\r\nAssociated Symptoms: [Any other symptoms present]\r\nPast Medical History (PMH): [Relevant diagnoses, conditions]\r\nPast Psychiatric History (if applicable): [History of mental health conditions, hospitalizations]\r\nMedications: [List of current medications with dosages]\r\nAllergies: [Drug, food, or environmental allergies with reactions]\r\nFamily History (FH): [Relevant conditions in first-degree relatives]\r\nSocial History (SH): [Lifestyle factors, substance use, living situation, employment]\r\nReview of Systems (ROS): [Pertinent positives and negatives]\r\nObjective:\r\nVital Signs: [BP, HR, RR, Temp, SpO₂, Weight, BMI]\r\nGeneral Appearance: [Patient’s overall presentation]\r\nPhysical Exam Findings: (Only relevant systems based on complaint)\r\nHEENT: [Findings related to head, eyes, ears, nose, throat]\r\nCardiovascular: [Heart sounds, murmurs, peripheral pulses]\r\nRespiratory: [Breath sounds, effort]\r\nAbdomen: [Tenderness, masses, bowel sounds]\r\nNeurologic: [Reflexes, strength, sensation]\r\nPsychiatric (if applicable): [Mood, affect, thought process, insight, judgment]\r\nDiagnostic Tests: [Relevant lab results, imaging, EKG findings]\r\nAssessment:\r\nPrimary Diagnosis: [Most likely diagnosis]\r\nDifferential Diagnoses: [List of alternative possibilities]\r\nClinical Rationale: [Brief explanation supporting the diagnosis]\r\nPlan:\r\nMedications: [Any new prescriptions, adjustments, discontinuations]\r\nDiagnostics: [Labs, imaging, or further testing ordered]\r\nReferrals: [Specialists or services patient is referred to]\r\nProcedures: [Any in-office procedures performed or planned]\r\nPatient Education & Counseling: [Discussion points about condition, medications, lifestyle changes]\r\nFollow-Up: [Next appointment, monitoring plan]\r\nEnsure the SOAP note is strictly formatted as shown above. No additional text or explanations should be included in the response—only the SOAP note in its structured format. Here is the transcript:" +
+                            transcriptContent
                         }
-                        },
+                    },
                     temperature = 0.7 // Adjust temperature for creativity
                 };
 

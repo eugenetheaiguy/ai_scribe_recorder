@@ -22,10 +22,7 @@ namespace AI_Scribe.Services
         /// <param name="audioFilePath">Path to the audio file.</param>
         /// <returns>Transcribed text as a string.</returns>
         static public async Task<string> TranscribeAudio(string audioFilePath)
-        {
-
-
-            
+        {   
             string transcriptFile = "";
             string wavFilePath = "";
             try
@@ -33,7 +30,7 @@ namespace AI_Scribe.Services
 
                 var client = new RestClient("https://api.openai.com/v1/audio");
                 var request = new RestRequest("transcriptions", Method.Post);
-                request.AddHeader("Authorization", "Bearer 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");
+                request.AddHeader("Authorization", "PUTTOKENHERE");
                 request.AddFile("file", audioFilePath);
                 request.AddParameter("model", "whisper-1");
 
