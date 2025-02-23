@@ -24,13 +24,13 @@ namespace AI_Scribe.Services
         static public async Task<string> TranscribeAudio(string audioFilePath)
         {   
             string transcriptFile = "";
-            string wavFilePath = "";
+            //string wavFilePath = "";
             try
             {
 
                 var client = new RestClient("https://api.openai.com/v1/audio");
                 var request = new RestRequest("transcriptions", Method.Post);
-                request.AddHeader("Authorization", "PUTTOKENHERE");
+                request.AddHeader("Authorization", "Bearer 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");
                 request.AddFile("file", audioFilePath);
                 request.AddParameter("model", "whisper-1");
 

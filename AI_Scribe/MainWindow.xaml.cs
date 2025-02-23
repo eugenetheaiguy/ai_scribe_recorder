@@ -12,6 +12,13 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
+using System.Data;
+using Microsoft.Data.SqlClient;
+using System.Diagnostics.Metrics;
+using Scribe_Business;
+using static System.Net.Mime.MediaTypeNames;
+//using System.Windows.Forms;
+
 namespace AI_Scribe
 {
 
@@ -20,11 +27,14 @@ namespace AI_Scribe
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
+
         private bool isRecording = false;
         private WaveInEvent waveIn;
         private WaveFileWriter waveWriter;
         private Stopwatch _stopwatch;
         private string newScribeOutputPath;
+        private clsRecordings objRecording;
 
         // Add this property
         private ObservableCollection<ScribeRecording> _recordings;
@@ -63,8 +73,18 @@ namespace AI_Scribe
             InitializeComponent();
             InitializeTimer();
             DataContext = this;
-
-            LoadExistingRecordings();
+            objRecording = new clsRecordings();
+            string _doctorID = objRecording.GetDoctorId("chungpocheung@gmail.com", "YaoMing11!");
+            DataSet _dsScribe = objRecording.GetExistingScribes(_doctorID);
+            if (_dsScribe.Tables[0].Rows.Count > 0)
+            {
+                LoadExistingRecordingsFromDataset(_dsScribe);
+                //LoadExistingRecordings();
+            }
+            else
+            {
+                LoadExistingRecordings();
+            }
         }
 
         public void ShowProcessingOverlay()
@@ -76,10 +96,7 @@ namespace AI_Scribe
         {
             ProcessingOverlay.Visibility = Visibility.Collapsed;
         }
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
-        }
 
         private void StartRecording()
         {
@@ -89,8 +106,8 @@ namespace AI_Scribe
                 var parser = new FileIniDataParser();
                 var iniData = parser.ReadFile("config.ini");
 
-                //Create Directory for Recordings if it does not exist
-                Directory.CreateDirectory(iniData["Storage"]["RecordingsPath"]);
+                //Create Directory for Recordings if it does not exist Commented by Jeff
+                //Directory.CreateDirectory(iniData["Storage"]["RecordingsPath"]);
 
                 //Create Directory for newest Recording
                 var newRecordingFolderGuid = Guid.NewGuid().ToString();
@@ -184,7 +201,7 @@ namespace AI_Scribe
             }
         }
 
-        private async void LoadExistingRecordings()
+        private void LoadExistingRecordings()
         {
             try
             {
@@ -194,7 +211,8 @@ namespace AI_Scribe
 
                 if (!Directory.Exists(recordingsPath))
                 {
-                    return;
+                    Directory.CreateDirectory(recordingsPath);
+                    //                   return;
                 }
 
                 // Get all GUID folders
@@ -210,25 +228,28 @@ namespace AI_Scribe
                         foreach (var wavFile in mp3Files)
                         {
                             // Get the base filename without extension
-                            string baseFileName = Path.GetFileNameWithoutExtension(wavFile);
-                            string folderPath = Path.GetDirectoryName(wavFile);
+                            var baseFileName = Path.GetFileNameWithoutExtension(wavFile);
+                            var folderPath = Path.GetDirectoryName(wavFile);
 
                             // Construct expected transcript and note file paths
-                            string transcriptPath = Path.Combine(folderPath, $"{baseFileName}.transcript.txt");
-                            string notePath = Path.Combine(folderPath, $"{baseFileName}.note.txt");
-                            string namePath = Path.Combine(folderPath, $"{baseFileName}.name.txt");
-
-                            // Verify all required files exist
-                            if (File.Exists(wavFile))
+                            if (folderPath != null)
                             {
-                                // Create ScribeRecording object
-                                var recording = new ScribeRecording(wavFile, transcriptPath, notePath, namePath);
+                                string transcriptFile = Path.Combine(folderPath, $"{baseFileName}.transcript.txt");
+                                string noteFile = Path.Combine(folderPath, $"{baseFileName}.note.txt");
+                                string nameFile = Path.Combine(folderPath, $"{baseFileName}.name.txt");
 
-                                // Add to collection on UI thread
-                                Application.Current.Dispatcher.Invoke(() =>
+                                // Verify all required files exist
+                                if (File.Exists(wavFile) && File.Exists(transcriptFile) && File.Exists(noteFile) && File.Exists(nameFile))
                                 {
-                                    Recordings.Add(recording);
-                                });
+                                    // Create ScribeRecording object
+                                    var recording = new ScribeRecording(wavFile, transcriptFile, noteFile, nameFile);
+
+                                    // Add to collection on UI thread
+                                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                                    {
+                                        Recordings.Add(recording);
+                                    });
+                                }
                             }
                         }
                     }
@@ -275,13 +296,13 @@ namespace AI_Scribe
                 if (waveWriter != null)
                 {
                     waveWriter.Dispose();
-                    waveWriter = null;
+                    //waveWriter= null;
                 }
 
                 if (waveIn != null)
                 {
                     waveIn.Dispose();
-                    waveIn = null;
+                    //waveIn = null;
                 }
 
                 // Create output directory if it doesn't exist
@@ -297,7 +318,7 @@ namespace AI_Scribe
 
 
                 // Add to collection on UI thread
-                Application.Current.Dispatcher.Invoke(() =>
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
                     Recordings.Add(recording);
                 });
@@ -314,23 +335,23 @@ namespace AI_Scribe
                 if (waveWriter != null)
                 {
                     waveWriter.Dispose();
-                    waveWriter = null;
+                    //waveWriter = null;
                 }
                 if (waveIn != null)
                 {
                     waveIn.Dispose();
-                    waveIn = null;
+                    //waveIn = null;
                 }
             }
         }
 
-        private TimeSpan GetAudioDuration(string filePath)
-        {
-            using (var audioFile = new AudioFileReader(filePath))
+        /*private TimeSpan GetAudioDuration(string filePath)
+         {
+            //using (var audioFile = new AudioFileReader(filePath))
             {
                 return audioFile.TotalTime;
             }
-        }
+        } */
 
         // Add this method to your MainWindow.xaml.cs
         private async Task ShowNotification(string message, int durationMs = 3000)
@@ -349,15 +370,15 @@ namespace AI_Scribe
             try
             {
                 TabItem selectedTab = (TabItem)DocumentTabControl.SelectedItem;
-                if (selectedTab!= null)
+                if (selectedTab != null)
                 {
                     TextBox textboxwithtext = (TextBox)selectedTab.Content;
-                    
+
                     Clipboard.SetText(textboxwithtext.Text);
                     // Optional: Show success message or status
                 }
                 await ShowNotification("Text copied!");
-            
+
             }
             catch (Exception ex)
             {
@@ -384,7 +405,6 @@ namespace AI_Scribe
             _recordingTimer.Interval = TimeSpan.FromMilliseconds(16);
             _recordingTimer.Tick += Timer_Tick;
             RecordingTime = TimeSpan.Zero;
-
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -418,7 +438,7 @@ namespace AI_Scribe
                 _recordingTimer.Stop();
                 _stopwatch.Stop();
                 _stopwatch.Reset();
-                RecordButton.Style = (Style)FindResource("RecordingButton");        
+                RecordButton.Style = (Style)FindResource("RecordingButton");
             }
         }
 
@@ -434,7 +454,7 @@ namespace AI_Scribe
 
         }
 
-        
+
         // Event: Switch from TextBlock to TextBox on Click
         private void DisplayNameText_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -472,24 +492,27 @@ namespace AI_Scribe
         }
 
         // Event: Hide TextBox and show TextBlock when Enter is pressed
-        private void DisplayNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void LoadExistingRecordingsFromDataset(DataSet _dsScribe)
         {
-            if (e.Key == Key.Enter)
+            foreach (DataRow rowScribe in _dsScribe.Tables[0].Rows)
             {
-                if (sender is TextBox textBox)
+                string mp3File = rowScribe["Folder"].ToString() + rowScribe["MP3"].ToString();
+                string transcriptFile = rowScribe["Folder"].ToString() + rowScribe["Transcript"].ToString();
+                string noteFile = rowScribe["Folder"].ToString() + rowScribe["Notes"].ToString();
+                string nameFile = rowScribe["Folder"].ToString() + rowScribe["PatientName"].ToString();
+
+                if (File.Exists(mp3File) && File.Exists(transcriptFile) && File.Exists(noteFile) && File.Exists(nameFile))
                 {
-                    if (textBox.Parent is StackPanel parent)
+                    // Create ScribeRecording object
+                    var recording = new ScribeRecording(mp3File, transcriptFile, noteFile, nameFile);
+
+                    //Add to collection on UI thread
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
-                        var textBlock = parent.Children[0] as TextBlock; // Find the TextBlock
-                        if (textBlock != null)
-                        {
-                            textBox.Visibility = Visibility.Collapsed;
-                            textBlock.Visibility = Visibility.Visible;
-                        }
-                    }
+                        Recordings.Add(recording);
+                    });
                 }
             }
         }
     }
-
 }

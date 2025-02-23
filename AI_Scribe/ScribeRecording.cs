@@ -17,12 +17,12 @@ using System.Globalization;
 
 namespace AI_Scribe
 {
-    public class ScribeRecording : INotifyPropertyChanged
+    public class ScribeRecording(string audioFile, string transcriptFile, string noteFile, string metaData) : INotifyPropertyChanged
     {
-        private string audioFilePath;
-        private string noteFile;
-        private string transcriptFile;
-        private string nameFile;
+        private string audioFilePath = audioFile;
+        private string noteFile = noteFile;
+        private string transcriptFile = transcriptFile;
+        private string nameFile = metaData;
 
         private bool isSelectedForDeletion;
         private string recordedAtDisplay;
@@ -73,17 +73,6 @@ namespace AI_Scribe
 
                 return "Invalid date/time format";
             }
-        }
-
-
-        public ScribeRecording(string audioFile, string transcriptFile, string noteFile, string metaData)
-        {
-
-            // Move/Copy files to the new structure while keeping original filenames
-            this.audioFilePath = audioFile;
-            this.transcriptFile = transcriptFile;
-            this.noteFile = noteFile;
-            this.nameFile = metaData;// We assume only metadata is displayhName
         }
 
         private string MoveFileToFolder(string sourceFile, string targetFolder)

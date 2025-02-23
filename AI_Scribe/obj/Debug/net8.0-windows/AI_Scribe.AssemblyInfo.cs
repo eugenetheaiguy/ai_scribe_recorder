@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AI_Scribe")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de53d1dfc6c5c51b2842d4bd6ef06bad0dffdffe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+994a45ab21992e77b5f3b726fc4c55e5cf081542")]
 [assembly: System.Reflection.AssemblyProductAttribute("AI_Scribe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AI_Scribe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

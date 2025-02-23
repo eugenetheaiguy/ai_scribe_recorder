@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AI_Scribe.Types;
 using System.Text.Json;
 
+
 namespace AI_Scribe.Services
 {
     /// <summary>
@@ -197,7 +198,8 @@ public class ConfigData
             var client = new RestClient(OpenAiEndpoint);
             var request = new RestRequest();
             request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Bearer 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");
+            // request.AddHeader("Authorization", $"Bearer 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");
+            request.AddHeader("Authorization", $"Bearer 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");           
             request.AddHeader("Content-Type", "application/json");
 
             var requestBody = new
