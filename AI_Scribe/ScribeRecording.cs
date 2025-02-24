@@ -32,7 +32,14 @@ namespace AI_Scribe
         {
             get
             {
-                return File.ReadAllText($"{nameFile}");
+                try
+                {
+                    return File.ReadAllText($"{nameFile}");
+                }
+                catch (Exception e)
+                {
+                    return "Failed Recording";
+                }
             }
             set
             {
@@ -113,7 +120,7 @@ namespace AI_Scribe
         {
             string mp3AudioFilePath = audioFilePath.Replace("wav", "mp3");
             ConvertWavToMp3(audioFilePath, audioFilePath.Replace("wav", "mp3"), 128);
-            var outputTranscriptFile = await TranscriptionService_Whisper.TranscribeAudio(audioFilePath);
+            var outputTranscriptFile = await TranscriptionService_Whisper.TranscribeAudio(mp3AudioFilePath);
             var outputNoteFile = await NoteGenerator_OpenAI.GenerateNotes(outputTranscriptFile);
             var name = await NoteGenerator_OpenAI.ExtractName(outputTranscriptFile);
             return new ScribeRecording(mp3AudioFilePath, outputTranscriptFile, outputNoteFile, name);
@@ -121,25 +128,57 @@ namespace AI_Scribe
 
         public static void ConvertWavToMp3(string wavPath, string mp3Path, int bitRate = 128)
         {
+            // Convert WAV to MP3
             using (var reader = new WaveFileReader(wavPath))
             {
                 using (var writer = new LameMP3FileWriter(mp3Path, reader.WaveFormat, bitRate))
-                {         {
-            reader.CopyTo(writer);
-
-                }}
+                {
+                    reader.CopyTo(writer);
+                }
             }
 
+            // Verify the generated MP3 file's integrity
+            if (IsMp3FileValid(mp3Path))
+            {
+                // If valid, delete the WAV file.
+                File.Delete(wavPath);
+            }
+            else
+            {
+                // Optionally handle the error (e.g., log the error or throw an exception)
+                throw new InvalidOperationException("MP3 file is corrupted or unreadable.");
+            }
         }
+
+        private static bool IsMp3FileValid(string mp3Path)
+        {
+            try
+            {
+                using (var mp3Reader = new Mp3FileReader(mp3Path))
+                {
+                    // Read through the entire file.
+                    var buffer = new byte[4096];
+                    while (mp3Reader.Read(buffer, 0, buffer.Length) > 0)
+                    {
+                        // No need to process data; just ensuring the file can be read.
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                // If any exception occurs, assume the file is not valid.
+                return false;
+            }
+        }
+
+
 
 
         public async Task<ScribeRecording> Regenerate()
         {
-
             await TranscriptionService_Whisper.TranscribeAudio(AudioFilePath);
-
             await NoteGenerator_OpenAI.GenerateNotes(transcriptFile);
-
             OnPropertyChanged(nameof(Note));
             OnPropertyChanged(nameof(Transcript));
             return this;
@@ -170,11 +209,51 @@ namespace AI_Scribe
  
             }
         }
+
+        /// <summary>
+        /// Returns the actual DateTime parsed from the filename.
+        /// Assumes the filename is in the format: "Recording_YYYYMMDD_HHmmss.xxx".
+        /// </summary>
+        public DateTime RecordingDate
+        {
+            get
+            {
+                // Split the filename by underscore and period.
+                string[] parts = audioFilePath.Split(new char[] { '_', '.' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (parts.Length < 3)
+                {
+                    return DateTime.MinValue;
+                }
+
+                string date = parts[1];
+                string time = parts[2];
+
+                if (date.Length == 8 && time.Length >= 6)
+                {
+                    return DateTime.ParseExact(
+                        date + time.Substring(0, 6),
+                        "yyyyMMddHHmmss",
+                        CultureInfo.InvariantCulture
+                    );
+                }
+
+                return DateTime.MinValue;
+            }
+        }
+
         public string Note
         {
             get
             {
-                return File.ReadAllText($"{noteFile}");
+                try
+                {
+                    return File.ReadAllText($"{noteFile}");
+                }
+                catch (Exception e)
+                {
+                    return "Failed Recording Please Regenerate";                   
+                }
             }
             set
             {
@@ -186,7 +265,14 @@ namespace AI_Scribe
         {
             get
             {
-                return File.ReadAllText($"{transcriptFile}");
+                try
+                {
+                    return File.ReadAllText($"{transcriptFile}");
+                }
+                catch (Exception e)
+                {
+                    return "Failed Transcript, Please Press Regenerate";
+                }
             }
             set
             {

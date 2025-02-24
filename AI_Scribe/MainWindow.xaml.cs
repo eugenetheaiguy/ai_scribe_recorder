@@ -242,6 +242,10 @@ namespace AI_Scribe
                             MessageBoxImage.Warning);
                     }
                 }
+
+                var sorted = Recordings.OrderByDescending(r => r.RecordingDate).ToList();
+                // Rebuild the ObservableCollection from the sorted list
+                Recordings = new ObservableCollection<ScribeRecording>(sorted);
             }
             catch (Exception ex)
             {
@@ -299,7 +303,8 @@ namespace AI_Scribe
                 // Add to collection on UI thread
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Recordings.Add(recording);
+                    Recordings.Insert(0,recording);
+                    SelectedRecording = Recordings.FirstOrDefault();
                 });
             }
             catch (Exception ex)

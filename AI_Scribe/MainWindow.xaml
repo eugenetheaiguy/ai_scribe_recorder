@@ -177,6 +177,7 @@
             <!-- Import File, Select All Checkbox, and Delete Selected Buttons -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
                 <Button Content="+ Import file" 
+            Visibility="Hidden"
             Style="{StaticResource ModernButton}"
             HorizontalAlignment="Left"/>
                 <CheckBox Content="Select All"
@@ -275,6 +276,7 @@
                 <ComboBox Width="200" 
                           Background="#FF2D2D2D"
                           Foreground="White"
+                          Visibility="Hidden"
                           BorderThickness="0">
                     <ComboBoxItem Content="No input device"/>
                 </ComboBox>
@@ -354,39 +356,124 @@
                     </Grid>
                     <Grid>
                     <!-- TabControl -->
-
                     <TabControl HorizontalAlignment="Stretch" 
                                 VerticalAlignment="Stretch"
                                 x:Name="DocumentTabControl"
                                 Style="{StaticResource ModernTabControl}"
                                 ItemContainerStyle="{StaticResource ModernTabItem}">
                         <!-- Apply the ModernTabItem style here -->
-                        <!-- Tab 1: Transcript -->
-                        <TabItem Header="Transcript">
-                            <TextBox AcceptsReturn="True" 
-                                     TextWrapping="Wrap"
-                                     VerticalScrollBarVisibility="Auto"
-                                     HorizontalScrollBarVisibility="Disabled"
-                                     Background="Transparent"
-                                     Foreground="White"
-                                     BorderThickness="0"
-                                     Padding="10"
-                                     Text="{Binding SelectedRecording.Transcript, UpdateSourceTrigger=PropertyChanged}"/>
-                        </TabItem>
 
-                        <!-- Tab 2: Note -->
-                        <TabItem Header="Note">
-                            <TextBox AcceptsReturn="True" 
-                                     TextWrapping="Wrap"
-                                     VerticalScrollBarVisibility="Auto"
-                                     HorizontalScrollBarVisibility="Disabled"
-                                     Background="Transparent"
-                                     Foreground="White"
-                                     BorderThickness="0"
-                                     Padding="10"
-                                     Text="{Binding SelectedRecording.Note, UpdateSourceTrigger=PropertyChanged}"/>
-                        </TabItem>
-                    </TabControl>
+                            <!-- Tab 1: Note -->
+                            <TabItem Header="Note">
+                                <TextBox AcceptsReturn="True" 
+                                        TextWrapping="Wrap"
+                                        VerticalScrollBarVisibility="Auto"
+                                        HorizontalScrollBarVisibility="Disabled"
+                                        Background="Transparent"
+                                        Foreground="White"
+                                        BorderThickness="0"
+                                        Padding="10"
+                                        Text="{Binding SelectedRecording.Note, UpdateSourceTrigger=PropertyChanged}"/>
+                            </TabItem>
+                                <!-- Tab 2: Transcript -->
+                            <TabItem Header="Transcript">
+                                <TextBox AcceptsReturn="True" 
+                                         TextWrapping="Wrap"
+                                         VerticalScrollBarVisibility="Auto"
+                                         HorizontalScrollBarVisibility="Disabled"
+                                         Background="Transparent"
+                                         Foreground="White"
+                                         BorderThickness="0"
+                                         Padding="10"
+                                         Text="{Binding SelectedRecording.Transcript, UpdateSourceTrigger=PropertyChanged}"/>
+                            </TabItem>
+
+                            <!-- Tab 3: Instructions (Chat Interface) -->
+                            <!-- Tab 3: Instructions (Chat Interface) -->
+                            <TabItem Header="Instructions">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Chat Display Area -->
+                                    <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl ItemsSource="{Binding ChatMessages}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,5">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <!-- AI Message (Left Side) -->
+                                                        <Border Grid.Column="0" 
+                                    Background="#383838" 
+                                    CornerRadius="10,10,10,0" 
+                                    Padding="10"
+                                    Margin="5,5,15,5"
+                                    Visibility="{Binding IsAIMessage, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TextBlock Text="{Binding Content}" 
+                                           TextWrapping="Wrap" 
+                                           Foreground="White"/>
+                                                        </Border>
+
+                                                        <!-- User Message (Right Side) -->
+                                                        <Border Grid.Column="1" 
+                                    Background="#0078D7" 
+                                    CornerRadius="10,10,0,10" 
+                                    Padding="10"
+                                    Margin="15,5,5,5"
+                                    Visibility="{Binding IsUserMessage, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TextBox Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                         TextWrapping="Wrap" 
+                                         Foreground="White"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         AcceptsReturn="True"
+                                         IsReadOnly="False"/>
+                                                        </Border>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+
+                                    <!-- Input Area -->
+                                    <Grid Grid.Row="1" Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox Grid.Column="0" 
+                     x:Name="ChatInputBox"
+                     Height="50"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     Padding="10,5"
+                     Background="#262626"
+                     Foreground="White"
+                     BorderBrush="#444444"
+                     BorderThickness="1"
+                     VerticalContentAlignment="Center"/>
+
+                                        <Button Grid.Column="1"
+                    Content="Send"
+                    Margin="5,0,0,0"
+                    Padding="15,0"
+                    Background="#0078D7"
+                    Foreground="White"
+                    BorderThickness="0"
+                    Command="{Binding SendMessageCommand}"
+                    CommandParameter="{Binding ElementName=ChatInputBox, Path=Text}"/>
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+
+
+                        </TabControl>
                     
 
                     <!-- Buttons in the top-right corner of the TabControl -->

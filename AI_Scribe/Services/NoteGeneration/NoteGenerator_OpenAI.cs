@@ -197,7 +197,7 @@ public class ConfigData
             var client = new RestClient(OpenAiEndpoint);
             var request = new RestRequest();
             request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Bearer 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");
+            request.AddHeader("Authorization", $"Bearer sk-svcacct-yQma4l6TJ3NPFriXaSiG7D8x4vGMl2ZOK0zxC9jnsMkLNQfKdWaQRNkSUnrK1GT3BlbkFJwEGH0e44wRSxsHBw0IbDrVCcVSYrUHuWihlkyYwkCCOCZOboO-woZofM0_xrYA");
             request.AddHeader("Content-Type", "application/json");
 
             var requestBody = new
