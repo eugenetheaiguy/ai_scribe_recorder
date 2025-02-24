@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DotNetEnv;
 
 namespace AI_Scribe.Services
 {
@@ -22,7 +23,10 @@ namespace AI_Scribe.Services
         /// <param name="audioFilePath">Path to the audio file.</param>
         /// <returns>Transcribed text as a string.</returns>
         static public async Task<string> TranscribeAudio(string audioFilePath)
-        {   
+        {
+            // At the beginning of your Main method or in Program.cs startup
+            Env.Load();
+            string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
             string transcriptFile = "";
             string wavFilePath = "";
             try

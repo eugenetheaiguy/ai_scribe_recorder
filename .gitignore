@@ -5,6 +5,7 @@
 *.userosscache
 *.sln.docstates
 *.sln.iml
+.env
 
 # Build results
 [Bb]in/

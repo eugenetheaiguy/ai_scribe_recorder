@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading.Tasks;
 using AI_Scribe.Types;
 using System.Text.Json;
+using DotNetEnv;
 
 namespace AI_Scribe.Services
 {
@@ -190,14 +191,13 @@ public class ConfigData
         /// <returns>Response content from OpenAI API.</returns>
         private static async Task<string> SendOpenAiRequest(List<Message> messages)
         {
-
-            if (Environment.GetEnvironmentVariable("OPENAI_API_KEY") != null)
-                throw new InvalidOperationException("OpenAI API key is not configured. Set the OPENAI_API_KEY environment variable.");
+            Env.Load();
+            string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
             var client = new RestClient(OpenAiEndpoint);
             var request = new RestRequest();
             request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Bearer sk-svcacct-yQma4l6TJ3NPFriXaSiG7D8x4vGMl2ZOK0zxC9jnsMkLNQfKdWaQRNkSUnrK1GT3BlbkFJwEGH0e44wRSxsHBw0IbDrVCcVSYrUHuWihlkyYwkCCOCZOboO-woZofM0_xrYA");
+            request.AddHeader("Authorization", apiKey);
             request.AddHeader("Content-Type", "application/json");
 
             var requestBody = new
